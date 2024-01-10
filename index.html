@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Świąteczna Strona</title>
+    
+</head>
+<body>
+
+<header>
+    <h1>Witaj na Świątecznej Stronie!</h1>
+    <img src="m.jpg" alt="Święty Mikołaj">
+</header>
+
+
+<nav>
+    
+    <ul>
+        <li><a href="#koleedy">Kolędy</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#gry">Gry Świąteczne</a></li>
+        <li><a href="#przepisy">Przepisy</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+</nav>
+
+<section id="koleedy">
+    
+    <h2>Popularne Kolędy</h2>
+    <article>
+        <h3>"Cicha Noc"</h3>
+        
+        <audio controls>
+            <source src="Cicha noc -Piękna tradycyjna kolęda z tekstem.mp3" type="audio/mpeg">
+            Twoja przeglądarka nie obsługuje odtwarzacza audio.
+        </audio>
+    </article>
+
+    <article>
+        <h3>"Jingle Bells"</h3>
+        
+        <audio controls>
+            <source src="Jingle Bells Christmas Song.mp3" type="audio/mpeg">
+            Twoja przeglądarka nie obsługuje odtwarzacza audio.
+        </audio>
+    </article>
+
+    
+</section>
+
+<section id="galeria">
+   
+    <h2>Galeria Świąteczna</h2>
+    <figure>
+        <img src="pobrane.jpg" alt="Choinka">
+        <figcaption>Piękna choinka udekorowana kolorowymi bombkami i światełkami.</figcaption>
+    </figure>
+
+    <figure>
+        <img src="c.jpg" alt="Prezenty">
+        <figcaption>Sterta kolorowych prezentów gotowych do rozpakowania.</figcaption>
+    </figure>
+
+   
+</section>
+
+<section id="gry">
+    
+    <h2>Gry Świąteczne</h2>
+    <div id="board"></div>
+
+    <script>
+        const board = document.getElementById('board');
+        let currentPlayer = 'X';
+        let gameBoard = ['', '', '', '', '', '', '', '', ''];
+        
+        function handleCellClick(index) {
+            if (gameBoard[index] === '') {
+                gameBoard[index] = currentPlayer;
+                renderBoard();
+                checkWinner();
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            }
+        }
+    
+        function renderBoard() {
+            board.innerHTML = '';
+            gameBoard.forEach((value, index) => {
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                cell.textContent = value;
+                cell.addEventListener('click', () => handleCellClick(index));
+                board.appendChild(cell);
+            });
+        }
+    
+        function checkWinner() {
+            const winPatterns = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+                [0, 4, 8], [2, 4, 6]             // diagonals
+            ];
+    
+            for (const pattern of winPatterns) {
+                const [a, b, c] = pattern;
+                if (gameBoard[a] !== '' && gameBoard[a] === gameBoard[b] && gameBoard[b] === gameBoard[c]) {
+                    alert(`${gameBoard[a]} wygrywa!`);
+                    resetGame();
+                    return;
+                }
+            }
+    
+            if (!gameBoard.includes('')) {
+                alert('Remis!');
+                resetGame();
+            }
+        }
+    
+        function resetGame() {
+            currentPlayer = 'X';
+            gameBoard = ['', '', '', '', '', '', '', '', ''];
+            renderBoard();
+        }
+    
+        renderBoard();
+    </script>
+
+    
+</section>
+
+<section id="przepisy">
+    
+    <h2>Przepisy na Świąteczne Smakołyki</h2>
+    <article>
+        <h3>Pierniki</h3>
+        <p>Mąkę przesiać na stolnicę, wlać rozpuszczony gorący miód i wymieszać (najlepiej nożem). Ciągle siekając, dodawać kolejno cukier, sodę, kakao i przyprawy, a następnie masło i jedno jajko.
+            Dolewać stopniowo (po 1 łyżce) mleka i łączyć składniki ciasta w jednolitą, miękką kulę (dolewamy tyle mleka aby ciasto łatwo się wyrabiało i było plastyczne, można nie wykorzystać całego mleka albo dodać troszkę więcej). Następnie wyrabiać ręką przez około 10 minut.
+            Na posypanej mąką stolnicy rozwałkować ciasto na placek o grubości ok. 1/2 cm. Foremkami wykrajać pierniczki. Układać na blasze wyłożonej papierem do pieczenia w odstępach około 2 cm od siebie.
+            Wierzch posmarować roztrzepanym jajkiem (niekoniecznie jeśli pierniczki będziemy dekorować) i piec w piekarniku nagrzanym do 180 stopni (góra i dół bez termoobiegu) przez ok. 10 minut.</p>
+        <article></article>
+        
+    </article>
+
+    <article>
+        <h3>Barszcz Wigilijny</h3>
+        <p>Do garnka wlać 500 ml wody, wsypać suszone borowiki. Na palniku kuchenki opalić nieobraną cebulę oraz 1 ząbek czosnku.
+            Cebulę i czosnek przekroić na pół i dodać do grzybów. Zagotować na umiarkowanym ogniu, następnie zmniejszyć ogień do minimum, przykryć i na minimalnym ogniu gotować przez około 25 minut (wywar ma tylko lekko mrugać a nie mocno się gotować).
+            W międzyczasie dodać do wywaru liście laurowe, ziele angielskie i pieprz ziarnisty.
+            Buraki i selera umyć, obrać ze skórki, następnie zetrzeć na tarce (na dużych oczkach, jak do surówki) lub posiekać w melakserze. Jabłko razem ze skórką zetrzeć na tarce.
+            Starte buraki, selera i jabłko włożyć do dużego garnka (warzyw będzie dość sporo), dodać 2,5 litry wody oraz wywar z grzybami. Przykryć garnek i zagotować na minimalnym ogniu (zagotowanie ma trwać około 20 minut). W międzyczasie dodać goździki, cynamon i anyż jeśli ich używamy.
+            Po zagotowaniu trzymać wywar jeszcze na minimalnym ogniu przez około 10 minut. Na koniec dodać ocet i wymieszać. Odstawić z ognia.
+            Do barszczu warto dodać wywar grzybowy pozostały po USZKACH (niekoniecznie cały) oraz 250 ml KWASU BURAKOWEGO.
+            Barszcz odstawić na około godzinę. W międzyczasie można zacząć przygotowywać USZKA.
+            Do barszczu dodać sól (do smaku), pieprz mielony, cukier oraz świeży posiekany ząbek czosnku, znów zostawić na minimum godzinę ale najlepiej do czasu całkowitego ostudzenia.
+            Barszcz przecedzić i schować do lodówki. Następnego dnia lub przed podaniem podgrzać, spróbować i w razie potrzeby doprawić solą i pieprzem.</p>
+    </article>
+    <style>
+        body {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+           height: 200vh;
+           margin: 0;
+           background-color: #87CEEB; 
+       }
+    
+      
+       header,nav, section, footer {
+           max-width: 1000px; 
+           width: 100%;
+           padding: 20px;
+           background-color: rgb(196, 24, 24); 
+           margin: 10px;
+           border-radius: 10px;
+           box-shadow: 0 0 10px rgba(129, 48, 48, 0.1); 
+
+
+
+       }
+       #galeria img {
+            max-width: 100%;
+            height: auto;
+            border: 5px solid #ffffff; 
+            border-radius: 8px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+            margin: 10px;
+     }
+     body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300vh;
+            margin: 0;
+        }
+
+        #board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 5px;
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    </style>
+    
+    
+    
+</section>
+<footer id="kontakt">
+       
+    <p>Skontaktuj się z nami: pawelek@gmail.com</p>
+</footer>
+
+</body>
+</html>
